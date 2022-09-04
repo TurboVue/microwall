@@ -211,7 +211,7 @@ const me = computed(() => store.state.me);
 const posts = computed(() => store.state.posts);
 const friendStatus = computed(() => store.getters.friendStatus);
 
-const socket = io(import.meta.env.VITE_BASE_URL + "/friends", {
+const socket = io(import.meta.env.VITE_FULL_URL + "/friends", {
   withCredentials: true,
 });
 
@@ -226,7 +226,7 @@ socket.on(
 if (store.state.me) {
   // console.log("connecting");
   const usersSocket = io(
-    import.meta.env.VITE_BASE_URL + "/user/" + me.value._id.toString(),
+    import.meta.env.VITE_FULL_URL + "/user/" + me.value._id.toString(),
     {
       withCredentials: true,
     }

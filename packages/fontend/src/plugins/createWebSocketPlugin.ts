@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-const socket = io(import.meta.env.VITE_BASE_URL + "/friends/notifications", {
+const socket = io(import.meta.env.VITE_FULL_URL + "/friends/notifications", {
   withCredentials: true,
 });
 

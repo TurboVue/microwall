@@ -97,15 +97,16 @@ const friendStatus = computed(() =>
     : 0
 );
 
-const socket = io(import.meta.env.VITE_BASE_URL + "/friends", {
+const socket = io(import.meta.env.VITE_FULL_URL + "/friends", {
   withCredentials: true,
 });
 
 socket.on(
   "refresh",
-  () =>
+  () => {
     store.dispatch("getMe") &&
     store.dispatch("getUser", props.user._id) &&
     store.dispatch("getUsers")
+  }
 );
 </script>

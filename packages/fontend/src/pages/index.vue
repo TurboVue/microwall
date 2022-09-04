@@ -2,6 +2,6 @@
   <Posts />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Posts from "@/components/Posts.vue";
 </script>

@@ -207,7 +207,7 @@ onMounted(() => {
 const post = computed(() => store.state.post);
 const comments = computed(() => store.state.comments);
 
-const socket = io(import.meta.env.VITE_BASE_URL + route.path, {
+const socket = io(import.meta.env.VITE_FULL_URL + route.path, {
   withCredentials: true,
 });
 

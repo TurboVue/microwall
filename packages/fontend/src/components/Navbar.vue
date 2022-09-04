@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky w-11/12 mx-auto my-4 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-800"
+    class="sticky top-0 w-11/12 mx-auto my-4 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-800"
   >
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <router-link :to="{ name: '/' }" class="flex">
@@ -227,7 +227,7 @@ const notifications = computed(() => store.state.notifications);
 const postNotifications = computed(() => store.state.postNotifications);
 
 const notificationsSocket = io(
-  import.meta.env.VITE_BASE_URL + "/friends/notifications",
+  import.meta.env.VITE_FULL_URL + "/friends/notifications",
   {
     withCredentials: true,
   }
@@ -245,7 +245,7 @@ notificationsSocket.on("-", (id) => store.dispatch("decreaseNotification", id));
 store.dispatch("getPostNotifications");
 
 const postNotificationsSocket = io(
-  import.meta.env.VITE_BASE_URL + "/post/notifications",
+  import.meta.env.VITE_FULL_URL + "/post/notifications",
   {
     withCredentials: true,
   }
@@ -261,7 +261,7 @@ watch(
   (me) => {
     if (me) {
       // console.log("/user/" + me._id);
-      const socket = io(import.meta.env.VITE_BASE_URL + "/user/" + me._id, {
+      const socket = io(import.meta.env.VITE_FULL_URL + "/user/" + me._id, {
         withCredentials: true,
       });
 
@@ -309,6 +309,5 @@ onMounted(()=> {
     }
   });
 })
-// const router = useRouter()
 console.log(router.options)
 </script>

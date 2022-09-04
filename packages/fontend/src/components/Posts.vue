@@ -17,11 +17,13 @@ onMounted(() => store.dispatch("getAllPosts", "public"));
 
 const posts = computed(() => store.state.posts);
 
-const socket = io(import.meta.env.VITE_BASE_URL + "/posts", {
+const socket = io(import.meta.env.VITE_FULL_URL + "/posts", {
   withCredentials: true,
 });
 
-socket.on("refresh", () => store.dispatch("getAllPosts", "public"));
+socket.on("refresh", () => {
+  store.dispatch("getAllPosts", "public")
+});
 
 onUnmounted(() => {
   socket.disconnect();
