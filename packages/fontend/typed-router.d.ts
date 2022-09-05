@@ -37,6 +37,7 @@ declare module 'vue-router/auto/routes' {
     '/me/edit': RouteRecordInfo<'/me/edit', '/me/edit', Record<never, never>, Record<never, never>>,
     '/post/[id]': RouteRecordInfo<'/post/[id]', '/post/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/post/add': RouteRecordInfo<'/post/add', '/post/add', Record<never, never>, Record<never, never>>,
+    '/post/private': RouteRecordInfo<'/post/private', '/post/private', Record<never, never>, Record<never, never>>,
     '/register': RouteRecordInfo<'/register', '/register', Record<never, never>, Record<never, never>>,
     '/user/': RouteRecordInfo<'/user/', '/user/', Record<never, never>, Record<never, never>>,
     '/user/[id]': RouteRecordInfo<'/user/[id]', '/user/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,

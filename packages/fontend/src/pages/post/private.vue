@@ -1,5 +1,5 @@
 <template>
-  <Posts type="public"/>
+  <Posts type="private"/>
 </template>
 
 <script setup lang="ts">

@@ -136,22 +136,24 @@
           <li class="pa-2">
             <router-link :to="{ name: '/' }">
               <div
-                v-if="me"
                 class="text-gray-700 dark:text-gray-400 md:(hover:text-blue-700 dark:hover:text-white)"
                 :class="{
                   '!text-blue-700 !dark:text-white': route.name === '/',
                 }"
               >
-                Posts {{ postNotifications }}
+                Posts_Public {{postNotifications}}
               </div>
+            </router-link>
+          </li>
+          <li class="pa-2">
+            <router-link :to="{ name: '/post/private' }">
               <div
-                v-else
-                class="text-gray-700 dark:text-gray-400 md:(hover:text-blue-700 dark:hover:text-white)"
-                :class="{
-                  '!text-blue-700 !dark:text-white': route.name === '/',
+                  class="text-gray-700 dark:text-gray-400 md:(hover:text-blue-700 dark:hover:text-white)"
+                  :class="{
+                  '!text-blue-700 !dark:text-white': route.name === '/post/private',
                 }"
               >
-                Posts
+                Posts_Private
               </div>
             </router-link>
           </li>
@@ -251,8 +253,9 @@ const postNotificationsSocket = io(
   }
 );
 
-postNotificationsSocket.on("refresh", () =>
-  store.dispatch("getPostNotifications")
+postNotificationsSocket.on("refresh", () => {
+    store.dispatch("getPostNotifications")
+  }
 );
 
 // io
@@ -276,6 +279,11 @@ watch(
         // console.log("getUserPosts");
         store.dispatch("getUserPosts", { type, author_id });
       });
+
+      // socket.on("PUBLIC", () => {
+      //       store.dispatch("getPostNotifications")
+      //     }
+      // );
 
       // socket.on("disconnect", () => {
       //   console.dir(socket);

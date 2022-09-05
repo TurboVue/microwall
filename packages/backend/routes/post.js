@@ -29,6 +29,21 @@ router.get("/public/:id", async (req, res) => {
     .catch((error) => res.status(500).json({ message: `api${error}` }));
 });
 
+router.get("/private", async (req, res) => {
+    Post.find({
+        $or: [{ type: "PRIVATE" }, { type: "GENERAL" }],
+        $in: req.user.friends.filter((friend) => friend.status === 3).map(friend => ({
+            author: friend.user._id.toString()
+        }))
+    })
+        .sort({ date: -1 })
+        .populate("author", "_id first_name last_name username")
+        .then((posts) =>
+            res.status(200).json({ posts: posts, message: "apiPostsFound" })
+        )
+        .catch((error) => res.status(500).json({ message: `api${error}` }));
+});
+
 router.get("/private/:id", async (req, res) => {
   if (
     req.user.friends.some(

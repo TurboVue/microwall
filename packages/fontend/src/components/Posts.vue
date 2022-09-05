@@ -6,14 +6,16 @@
   </div>
 </template>
 
-<script setup>
-import { onMounted, computed, onUnmounted } from "vue";
+<script setup lang="ts">
 import { useStore } from "vuex";
 import { io } from "socket.io-client";
 import Post from "@/components/Post.vue";
+const props = withDefaults(defineProps<{
+  type: 'public'| 'private'
+}>(), {})
 const store = useStore();
 
-onMounted(() => store.dispatch("getAllPosts", "public"));
+onMounted(() => store.dispatch("getAllPosts", props.type));
 
 const posts = computed(() => store.state.posts);
 
@@ -22,7 +24,7 @@ const socket = io(import.meta.env.VITE_FULL_URL + "/posts", {
 });
 
 socket.on("refresh", () => {
-  store.dispatch("getAllPosts", "public")
+  store.dispatch("getAllPosts", props.type)
 });
 
 onUnmounted(() => {
